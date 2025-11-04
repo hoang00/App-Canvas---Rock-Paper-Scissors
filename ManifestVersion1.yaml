@@ -1,0 +1,38 @@
+manifestVersion: 1
+
+info:
+  name: Rock Paper Scissors
+  version: 0.1.0
+  description: >
+    Minimal App Canvas demo that renders three buttons (Rock, Paper, Scissors)
+    and updates the canvas with the result via webhooks.
+
+# Define a Canvas feature you can insert in Notebook entries, templates, or on the App Homepage
+features:
+  - id: rps_canvas
+    name: RPS Canvas
+    type: CANVAS
+    locations:
+      - ENTRY
+      - ENTRY_TEMPLATE
+      # - APP_HOMEPAGE
+
+# Webhooks your app needs for interactive Canvas flows
+subscriptions:
+  deliveryMethod: WEBHOOK
+  messages:
+    - type: v2.canvas.created
+    - type: v2.canvas.userInteracted
+
+# (Optional) App configuration that shows up in the app's Config tab.
+# Access these at runtime via your app installation config API if you want.
+# You can delete this whole section if you don’t need settings.
+# configuration:
+#   schema:
+#     type: object
+#     properties:
+#       showEmojis:
+#         type: boolean
+#         title: Show emojis in button labels
+#         default: true
+#     additionalProperties: false
