@@ -1,0 +1,52 @@
+# =========================================
+# Benchling App Canvas / FastAPI Project
+# =========================================
+
+# 🔐 Environment variables
+.env
+
+# 🐍 Python virtual environments
+.venv/
+venv/
+
+# 🧱 Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 🧰 Build and distribution artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# 🧪 Test / coverage artifacts
+.coverage
+htmlcov/
+.tox/
+pytest_cache/
+.nox/
+
+# 🧑‍💻 Editor settings
+.vscode/
+.idea/
+
+# 💾 Logs and temp files
+*.log
+*.pot
+*.mo
+*.sqlite3
+*.db
+*.pid
+*.swp
+*.bak
+
+# 💻 OS-specific cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 🧩 Other caches (optional)
+.mypy_cache/
+.pytest_cache/
+.cache/

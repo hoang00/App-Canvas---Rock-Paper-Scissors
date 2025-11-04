@@ -15,7 +15,7 @@ It is intentionally tiny so you can lift it into your own environment
     pip install fastapi uvicorn httpx pydantic
 
 🔐 Env vars you must set (e.g., in a .env file or your host’s secret store):
-    BENCHLING_BASE_URL=https://{your-tenant}.benchling.com
+    BENCHLING_BASE_URL=https://hoang.benchling.com
     BENCHLING_ACCESS_TOKEN=...   # Bearer token for your Benchling *app* install
 
 ⚙️ Webhook URL to configure in your Benchling app:  POST {public_base}/webhook
@@ -48,9 +48,13 @@ import random
 from enum import Enum
 from typing import Dict, List, Optional
 
+from dotenv import load_dotenv  # <--- new
+load_dotenv()  # <--- new
+
 import httpx
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
+
 
 # -------------------------------
 # Domain model: Rock / Paper / Scissors
