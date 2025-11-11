@@ -22,6 +22,8 @@ import random
 from enum import Enum
 from typing import Dict, List, Optional
 
+import requests
+
 from dotenv import load_dotenv
 load_dotenv()  # loads .env next to this file (or current working dir)
 
@@ -73,12 +75,22 @@ class RPSGame:
 # Benchling API helpers
 # -------------------------------
 BENCHLING_BASE_URL = os.environ.get("BENCHLING_BASE_URL", "").rstrip("/")
-ACCESS_TOKEN = os.environ.get("BENCHLING_ACCESS_TOKEN", "")
+BENCHLING_SECRET = os.environ.get("BENCHLING_SECRET", "")
+BENCHLING_CLIENT_ID = os.environ.get("BENCHLING_CLIENT_ID", "")
 
-HEADERS = {
-    "Authorization": f"Bearer {ACCESS_TOKEN}",
-    "Content-Type": "application/json",
-}
+# Obtain App token
+response = requests.post(
+    "https://{tenant_name}.benchling.com/api/v2/token",
+    data={
+        "grant_type": "client_credentials",
+        "client_id": "{id_here}",
+        "client_secret": "{secret_here}"
+    }
+)
+token = response.json()["access_token"]
+
+# Use App's bearer token below:
+HEADERS = {"Authorization": f"Bearer {token}"}
 
 API_CREATE_CANVAS = "/api/v2/app-canvases"
 API_UPDATE_CANVAS = "/api/v2/app-canvases/{canvas_id}"
@@ -187,6 +199,12 @@ async def webhook(req: Request):
 @app.post("/webhook/canvas")
 async def webhook_canvas(req: Request):
     return await webhook(req)
+
+@app.post("/canvas")
+async def canvas_alias(req: Request):
+    # forward /canvas to the main handler
+    return await webhook(req)
+
 
 # -------------------------------
 # Local dev runner
