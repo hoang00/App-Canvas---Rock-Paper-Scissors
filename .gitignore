@@ -50,3 +50,6 @@ desktop.ini
 .mypy_cache/
 .pytest_cache/
 .cache/
+
+# Local Poetry temporary venv used for locking
+.poetry-temp/
